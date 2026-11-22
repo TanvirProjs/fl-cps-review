@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this material, please cite the article below."
+title: "Supplementary code and data: Continual, Uncertainty-Aware and Structure-Consistent Federated Learning for Distributed Cyber-Physical Systems and Edge Digital Twins"
+authors:
+  - family-names: Sardar
+    given-names: Tanvir Habib
+    orcid: "https://orcid.org/0000-0001-7880-0225"
+    affiliation: "Department of Computer Science and Engineering, Dayananda Sagar University, Bengaluru, India"
+repository-code: "https://github.com/TanvirProjs/fl-cps-review"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Continual, Uncertainty-Aware and Structure-Consistent Federated Learning for Distributed Cyber-Physical Systems and Edge Digital Twins: A Critical Review, Unified Formulation and Reproducible Benchmark"
+  authors:
+    - family-names: Sardar
+      given-names: Tanvir Habib
+      orcid: "https://orcid.org/0000-0001-7880-0225"
+  year: 2026
+  status: submitted
