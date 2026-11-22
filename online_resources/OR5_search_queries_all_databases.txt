@@ -1,0 +1,86 @@
+MULTI-DATABASE SEARCH — equivalents of the manuscript's Scopus query (Section 2.2)
+Prepared 15 Nov 2026. Hit counts are what each database returned on 15 Nov 2026 (no year limit).
+
+Scopus original (for reference):
+TITLE-ABS-KEY( ("federated learning" OR "federated machine learning" OR "federated optimization")
+ AND ("cyber-physical system*" OR "cyber physical system*" OR "industrial internet of things" OR IIoT
+      OR "digital twin*" OR "edge computing" OR "edge intelligence")
+ AND ("continual learning" OR "lifelong learning" OR "online learning" OR "concept drift"
+      OR "uncertainty quantification" OR "uncertainty-aware" OR "uncertainty aware"
+      OR "predictive uncertainty" OR "uncertainty calibration" OR "topology-aware" OR "topology aware"
+      OR "topology-preserving" OR "topology preserving" OR "network topology" OR "graph structure") )
+
+=====================================================================================
+1) IEEE XPLORE   (ieeexplore.ieee.org > Advanced Search > Command Search)
+=====================================================================================
+IEEE allows at most 25 words per Boolean clause, so the third block is split into three
+sub-queries. Run all three; the merge script removes the overlap.
+
+IEEE-1  continual / drift                                  (269 results on 15 Nov 2026)
+("All Metadata":"federated learning" OR "All Metadata":"federated machine learning" OR "All Metadata":"federated optimization") AND ("All Metadata":"cyber-physical system*" OR "All Metadata":"cyber physical system*" OR "All Metadata":"industrial internet of things" OR "All Metadata":IIoT OR "All Metadata":"digital twin*" OR "All Metadata":"edge computing" OR "All Metadata":"edge intelligence") AND ("All Metadata":"continual learning" OR "All Metadata":"lifelong learning" OR "All Metadata":"online learning" OR "All Metadata":"concept drift")
+
+IEEE-2  uncertainty                                        (38 results)
+("All Metadata":"federated learning" OR "All Metadata":"federated machine learning" OR "All Metadata":"federated optimization") AND ("All Metadata":"cyber-physical system*" OR "All Metadata":"cyber physical system*" OR "All Metadata":"industrial internet of things" OR "All Metadata":IIoT OR "All Metadata":"digital twin*" OR "All Metadata":"edge computing" OR "All Metadata":"edge intelligence") AND ("All Metadata":"uncertainty quantification" OR "All Metadata":"uncertainty-aware" OR "All Metadata":"uncertainty aware" OR "All Metadata":"predictive uncertainty" OR "All Metadata":"uncertainty calibration")
+
+IEEE-3  topology                                           (165 results)
+("All Metadata":"federated learning" OR "All Metadata":"federated machine learning" OR "All Metadata":"federated optimization") AND ("All Metadata":"cyber-physical system*" OR "All Metadata":"cyber physical system*" OR "All Metadata":"industrial internet of things" OR "All Metadata":IIoT OR "All Metadata":"digital twin*" OR "All Metadata":"edge computing" OR "All Metadata":"edge intelligence") AND ("All Metadata":"topology-aware" OR "All Metadata":"topology aware" OR "All Metadata":"topology-preserving" OR "All Metadata":"topology preserving" OR "All Metadata":"network topology" OR "All Metadata":"graph structure")
+
+Filters: Conferences, Journals, Magazines, Early Access Articles (untick Books, Standards, Courses).
+Export: results page > Export > Search Results > CSV  (IEEE exports up to 2,000 results at once).
+Save as: ieee_1.csv, ieee_2.csv, ieee_3.csv
+Note: "All Metadata" also searches author affiliations and venue names, which Scopus TITLE-ABS-KEY
+does not. The merge script's tak_match column flags records that match only outside
+title/abstract/keywords; report them as excluded "outside search fields".
+
+=====================================================================================
+2) WEB OF SCIENCE CORE COLLECTION   (Advanced Search; the full query fits in one line)
+=====================================================================================
+TS=( ("federated learning" OR "federated machine learning" OR "federated optimization") AND ("cyber-physical system*" OR "cyber physical system*" OR "industrial internet of things" OR IIoT OR "digital twin*" OR "edge computing" OR "edge intelligence") AND ("continual learning" OR "lifelong learning" OR "online learning" OR "concept drift" OR "uncertainty quantification" OR "uncertainty-aware" OR "uncertainty aware" OR "predictive uncertainty" OR "uncertainty calibration" OR "topology-aware" OR "topology aware" OR "topology-preserving" OR "topology preserving" OR "network topology" OR "graph structure") )
+
+Refine: Language = English; Document types = Article, Proceeding Paper, Review Article, Early Access.
+Export: Export > Tab delimited file > Records 1-1000 > Record content "Full Record" > Export.
+Save as: wos_savedrecs.txt   (needs institutional access — DSU library or remote access)
+Note: TS also searches Keywords Plus; report this as the field difference from Scopus.
+
+=====================================================================================
+3) SCIENCEDIRECT   (sciencedirect.com > Advanced search > field
+   "Title, abstract or author-specified keywords")
+=====================================================================================
+ScienceDirect allows at most 8 Boolean operators and no wildcards, so the query is split into
+2 x 3 = 6 sub-queries. Plurals/hyphen variants are matched automatically.
+
+SD-1  ("federated learning" OR "federated optimization") AND ("cyber-physical system" OR "industrial internet of things" OR IIoT) AND ("continual learning" OR "lifelong learning" OR "online learning" OR "concept drift")
+SD-2  ("federated learning" OR "federated optimization") AND ("digital twin" OR "edge computing" OR "edge intelligence") AND ("continual learning" OR "lifelong learning" OR "online learning" OR "concept drift")
+SD-3  ("federated learning" OR "federated optimization") AND ("cyber-physical system" OR "industrial internet of things" OR IIoT) AND ("uncertainty quantification" OR "uncertainty-aware" OR "predictive uncertainty" OR "uncertainty calibration")
+SD-4  ("federated learning" OR "federated optimization") AND ("digital twin" OR "edge computing" OR "edge intelligence") AND ("uncertainty quantification" OR "uncertainty-aware" OR "predictive uncertainty" OR "uncertainty calibration")
+SD-5  ("federated learning" OR "federated optimization") AND ("cyber-physical system" OR "industrial internet of things" OR IIoT) AND ("topology-aware" OR "topology-preserving" OR "network topology" OR "graph structure")
+SD-6  ("federated learning" OR "federated optimization") AND ("digital twin" OR "edge computing" OR "edge intelligence") AND ("topology-aware" OR "topology-preserving" OR "network topology" OR "graph structure")
+
+"federated machine learning" is dropped to stay within 8 operators; it is a phrase that
+"federated learning" does not contain, so state this in the Methods (its effect is negligible
+because nearly all such papers also say "federated learning").
+Filters: Article type = Research articles, Review articles, Conference abstracts / proceedings.
+Export: set 100 results per page > select all > Export > Export citation to RIS
+        (repeat per page). Save as: sciencedirect_sd1.ris ... sciencedirect_sd6.ris
+
+=====================================================================================
+4) OPENALEX   (free, covers arXiv preprints and most publishers; no login needed)
+=====================================================================================
+Open this link (the full query is already in it)               (214 results on 15 Nov 2026)
+https://openalex.org/works?search.title_and_abstract=(%22federated+learning%22+OR+%22federated+machine+learning%22+OR+%22federated+optimization%22)+AND+(%22cyber-physical+system%22+OR+%22cyber+physical+system%22+OR+%22industrial+internet+of+things%22+OR+IIoT+OR+%22digital+twin%22+OR+%22edge+computing%22+OR+%22edge+intelligence%22)+AND+(%22continual+learning%22+OR+%22lifelong+learning%22+OR+%22online+learning%22+OR+%22concept+drift%22+OR+%22uncertainty+quantification%22+OR+%22uncertainty-aware%22+OR+%22uncertainty+aware%22+OR+%22predictive+uncertainty%22+OR+%22uncertainty+calibration%22+OR+%22topology-aware%22+OR+%22topology+aware%22+OR+%22topology-preserving%22+OR+%22topology+preserving%22+OR+%22network+topology%22+OR+%22graph+structure%22)
+Export: download icon above the result list > Spreadsheet (.csv). Save as: openalex.csv
+Note: OpenAlex searches title + abstract (not keywords) and stems words, so it covers
+"cyber-physical systems" and "digital twins" without wildcards.
+
+=====================================================================================
+5) OPTIONAL — broadened vocabulary (tests whether the query misses
+   synonyms). Run it as a SECOND, clearly labelled search; do not merge it silently into the
+   equivalent search above. Scopus form shown; translate as above.
+=====================================================================================
+TITLE-ABS-KEY( ("federated learning" OR "federated optimization" OR "federated averaging")
+ AND ("cyber-physical system*" OR "industrial internet of things" OR IIoT OR "digital twin*"
+      OR "edge computing" OR "edge intelligence" OR "smart grid*" OR "power system*" OR "industrial control")
+ AND ("catastrophic forgetting" OR "incremental learning" OR "class-incremental" OR "domain shift"
+      OR "distribution shift" OR "Bayesian" OR "conformal" OR "calibrat*" OR "evidential"
+      OR "decentralized" OR "decentralised" OR "gossip" OR "peer-to-peer" OR "graph neural network*"
+      OR "physics-informed") )
